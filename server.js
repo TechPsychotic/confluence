@@ -4,7 +4,7 @@ const app=express();
 const ejs = require('ejs');
 const networkInterfaces = os.networkInterfaces();
 const ipAddresses = [];
-const ip=ipAddresses[2];
+
 
 Object.keys(networkInterfaces).forEach(interfaceName => {
   const interfaces = networkInterfaces[interfaceName];
@@ -14,8 +14,8 @@ Object.keys(networkInterfaces).forEach(interfaceName => {
     }
   });
 });
-
-console.log(`Server IP addresses: ${ipAddresses[2]}`);
+const ip=ipAddresses[1];
+console.log(`Server IP addresses: ${ip}`);
 
 const fs = require('fs');
 const path = require('path');
@@ -24,41 +24,33 @@ const multer = require('multer');
 
 
 app.use(express.static(path.join(__dirname, 'public')));
-// Set up storage engine
-
+// Set up Multer for file uploads
 const storage = multer.diskStorage({
-  destination: './uploads/',
-  
-  filename: function(req, file, cb) {
-    cb(null, path.basename(file.originalname).split('.').slice(0, -1).join('.') + '-' + Date.now() + path.extname(file.originalname));
-  }
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
 });
 
-// Initialize upload
-const upload = multer({
-  storage: storage,
-  
 
-}).single('file');
+// Initialize upload
+const upload = multer({ storage: storage });
 
 // Check file type
 
 
 // Route for file upload
-app.get("/upload", (req, res) => {
-  res.sendFile(__dirname + '/public/upload.html');
+// Serve HTML form for file upload
+app.get('/upload', (req, res) => {
+  res.sendFile(__dirname + '/public/upload1.html');
 });
-app.post('/upload', function(req, res) {
-  
-  upload(req, res, function(err) {
-    if (err) {
-      res.send(err);
-    } else {
-      
-      console.log(req.file);
-      res.sendFile(__dirname + '/public/uploaded.html');
-    }
-  });
+
+
+// Handle file upload
+app.post('/upload', upload.array('files'), (req, res) => {
+  res.sendFile(__dirname + '/public/uploaded.html');
 });
 
 const directoryPath = path.join(__dirname, 'uploads');
@@ -107,7 +99,7 @@ app.get('/download', (req, res) => {
 
 
 app.listen(3000,ip, ()=>{
-  console.log(`server running at http://${ipAddresses[2]}:3000/`);
+  console.log(`server running at http://${ip}:3000/`);
 });
 
 function formatFileSize(sizeInBytes) {

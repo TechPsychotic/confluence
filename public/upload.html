@@ -24,7 +24,7 @@
       background: linear-gradient(145deg, #29272c, #302e34);
 		}
 
-		.form {
+		.form{
 			display: flex;
 			flex-direction: column;
 			align-items: center;
@@ -49,6 +49,7 @@
 			font-size: 24px;
 			font-weight: bold;
 			color: #d9d9d9;
+			text-align: center;
 		}
 
 		.form label:hover {
@@ -57,7 +58,7 @@
       transform: translate(2px, 2px);
 		}
 
-		.form input[type="submit"] {
+		#submit{
 			margin-top: 20px;
 			padding: 10px;
 			text-align: center;
@@ -73,7 +74,7 @@
             
 		}
 
-		.form input[type="submit"]:hover {
+		#submit:hover {
 			box-shadow: 5px 5px 10px #201f23, -5px -5px 10px #3a373f;
       transform: translate(2px, 2px);
 		}
@@ -89,54 +90,58 @@
 	<div class="container">
 		<h1>Upload file to the Confluence</h1>
 		<form class="form" action="/upload" method="POST" enctype="multipart/form-data">
-			<label for="file-upload">
-				<span>Select file</span>
-				<input type="file" name="file" id="file-upload">
-			</label><br>
-      <div class="selected-files"></div>
-	    <br>
-			<input type="submit" value="Upload">
-		</form>
+			<label class="custom-file-upload">
+				<input type="file" name="files" multiple>
+				Upload File(s)
+			  </label>
+			  <br/>
+			<div class="selected-files"></div><br/>
+			<button type="submit" id="submit">Upload</button>
+
+		  </form>
 		</div>
-  <script>
-		window.onload = function() {
-			const fileInput = document.querySelector('#file-upload');
-			const label = document.querySelector('label[for="file-upload"]');
-			const selectedFiles = document.querySelector('.selected-files');
-			fileInput.addEventListener('change', displayFileName);
-			label.addEventListener('click', removeFileSelection);
-			
-			function displayFileName() {
-				const fileName = fileInput.files[0].name;
-				const fileExt = fileName.split('.').pop();
-				selectedFiles.innerHTML = `
-					<span>${fileName}</span><br>
-					<center><span class="file-extension" >${fileExt} file</span></center>
-          
-				`;
-				label.classList.add('file-selected');
-				fileInput.setAttribute('disabled', '');
-			}
 
+		<script>
+			window.onload = function() {
+				const fileInput = document.querySelector('#file-upload');
+				const label = document.querySelector('label[for="file-upload"]');
+				const selectedFiles = document.querySelector('.selected-files');
+				fileInput.addEventListener('change', displayFileName);
+				label.addEventListener('click', removeFileSelection);
+				
+				function displayFileName() {
+					const fileName = fileInput.files[0].name;
+					const fileExt = fileName.split('.').pop();
+					selectedFiles.innerHTML = `
+						<span>${fileName}</span><br>
+						<center><span class="file-extension" >${fileExt} file</span></center>
+			  
+					`;
+					label.classList.add('file-selected');
+					fileInput.setAttribute('disabled', '');
+				}
+	
+				function removeFileSelection() {
+					selectedFiles.innerHTML = '';
+					label.classList.remove('file-selected');
+					fileInput.removeAttribute('disabled');
+				}
+			}
+	
 			function removeFileSelection() {
-				selectedFiles.innerHTML = '';
-				label.classList.remove('file-selected');
-				fileInput.removeAttribute('disabled');
+				const fileInput = document.querySelector('#file-upload');
+				const label = document.querySelector('label[for="file-upload"]');
+				fileInput.removeEventListener('change', displayFileName);
+				fileInput.value = '';
+				label.removeEventListener('click', removeFileSelection);
+				label.style.cursor = 'not-allowed';
+				label.style.opacity = '0.5';
+				label.style.pointerEvents = 'none';
+				selectedFiles.style.display = 'none';
 			}
-		}
+			
+		</script>
+	</body>
+	</html>
+	
 
-		function removeFileSelection() {
-			const fileInput = document.querySelector('#file-upload');
-			const label = document.querySelector('label[for="file-upload"]');
-			fileInput.removeEventListener('change', displayFileName);
-			fileInput.value = '';
-			label.removeEventListener('click', removeFileSelection);
-			label.style.cursor = 'not-allowed';
-			label.style.opacity = '0.5';
-			label.style.pointerEvents = 'none';
-			selectedFiles.style.display = 'none';
-		}
-		
-	</script>
-</body>
-</html>
