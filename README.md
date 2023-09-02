@@ -72,7 +72,7 @@ now let's move on to the next step
     - Making it more efficient and secure
 
 ## Donations
-- If you like my work and want to support me, you can donate me on [PayPal]()
+- If you like my work and want to support me, you can donate me on [PayPal](https://paypal.me/TechPsychotic?country.x=IN&locale.x=en_GB)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
