@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Upload Page</title>
+	<style>
+		body {
+			background-color: #2d2b31;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+		}
+
+		.container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			background-color: #2d2b31;
+			padding: 30px;
+			border-radius: 20px;
+			box-shadow:  9px 9px 17px #201f23,
+                  -9px -9px 17px #3a373f;
+      background: linear-gradient(145deg, #29272c, #302e34);
+		}
+
+		.form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.form input[type="file"] {
+			display: none;
+		}
+
+		.form label {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 120px;
+			width: 120px;
+			background-color: #2d2b31;
+			border-radius: 50%;
+			box-shadow:  19px 19px 62px #201f23,
+                          -19px -19px 62px #3a373f;
+			cursor: pointer;
+			font-size: 24px;
+			font-weight: bold;
+			color: #d9d9d9;
+		}
+
+		.form label:hover {
+			box-shadow:  5px 5px 10px #201f23,
+                  -5px -5px 10px #3a373f;
+      transform: translate(2px, 2px);
+		}
+
+		.form input[type="submit"] {
+			margin-top: 20px;
+			padding: 10px;
+			text-align: center;
+              background-color: #2d2b31;
+              border-radius: 50px;
+              border: none;
+              margin: auto;
+              box-shadow: 10px 10px 30px #201f23, -10px -10px 30px #3a373f;
+              color: #bebebe;
+              font-size: 24px;
+              padding: 16px 32px;
+              transition: all 0.3s ease-in-out;
+            
+		}
+
+		.form input[type="submit"]:hover {
+			box-shadow: 5px 5px 10px #201f23, -5px -5px 10px #3a373f;
+      transform: translate(2px, 2px);
+		}
+    .selected-files{
+      color: #bebebe;
+    }
+    h1{
+      color: #bebebe;
+    }
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Upload file to the Confluence</h1>
+		<form class="form" action="/upload" method="POST" enctype="multipart/form-data">
+			<label for="file-upload">
+				<span>Select file</span>
+				<input type="file" name="file" id="file-upload">
+			</label><br>
+      <div class="selected-files"></div>
+	    <br>
+			<input type="submit" value="Upload">
+		</form>
+		</div>
+  <script>
+		window.onload = function() {
+			const fileInput = document.querySelector('#file-upload');
+			const label = document.querySelector('label[for="file-upload"]');
+			const selectedFiles = document.querySelector('.selected-files');
+			fileInput.addEventListener('change', displayFileName);
+			label.addEventListener('click', removeFileSelection);
+			
+			function displayFileName() {
+				const fileName = fileInput.files[0].name;
+				const fileExt = fileName.split('.').pop();
+				selectedFiles.innerHTML = `
+					<span>${fileName}</span><br>
+					<center><span class="file-extension" >${fileExt} file</span></center>
+          
+				`;
+				label.classList.add('file-selected');
+				fileInput.setAttribute('disabled', '');
+			}
+
+			function removeFileSelection() {
+				selectedFiles.innerHTML = '';
+				label.classList.remove('file-selected');
+				fileInput.removeAttribute('disabled');
+			}
+		}
+
+		function removeFileSelection() {
+			const fileInput = document.querySelector('#file-upload');
+			const label = document.querySelector('label[for="file-upload"]');
+			fileInput.removeEventListener('change', displayFileName);
+			fileInput.value = '';
+			label.removeEventListener('click', removeFileSelection);
+			label.style.cursor = 'not-allowed';
+			label.style.opacity = '0.5';
+			label.style.pointerEvents = 'none';
+			selectedFiles.style.display = 'none';
+		}
+		
+	</script>
+</body>
+</html>
