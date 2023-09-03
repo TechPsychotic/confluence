@@ -14,7 +14,7 @@ Object.keys(networkInterfaces).forEach(interfaceName => {
     }
   });
 });
-const ip=ipAddresses[1];
+const ip=ipAddresses[0];
 console.log(`Server IP addresses: ${ip}`);
 
 const fs = require('fs');

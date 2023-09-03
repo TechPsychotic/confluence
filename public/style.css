@@ -5,6 +5,7 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
+  color: #fff;
 }
 
 .container {
@@ -80,6 +81,9 @@ h1{
   color: #bebebe;
 }
 h2{
+  color: #bebebe;
+}
+a{
   color: #bebebe;
 }
 .neumorphic-button {
