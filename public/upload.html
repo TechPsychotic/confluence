@@ -90,8 +90,8 @@
 	<div class="container">
 		<h1>Upload file to the Confluence</h1>
 		<form class="form" action="/upload" method="POST" enctype="multipart/form-data">
-			<label class="custom-file-upload">
-				<input type="file" name="files" multiple>
+			<label >
+				<input type="file" name="files" multiple class="file-upload">
 				Upload File(s)
 			  </label>
 			  <br/>
@@ -103,7 +103,7 @@
 
 		<script>
 			window.onload = function() {
-				const fileInput = document.querySelector('#file-upload');
+				const fileInput = document.querySelector('.file-upload');
 				const label = document.querySelector('label[for="file-upload"]');
 				const selectedFiles = document.querySelector('.selected-files');
 				fileInput.addEventListener('change', displayFileName);
