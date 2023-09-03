@@ -13,7 +13,7 @@ The very own local cloud storage
 - I know I could've used third party solutions or some of the repositories on **GITHUB** itself but I was curious how difficult will it be to make my own, also, I hate third party solutions...
 - Not to mention most of the times my ADHD kicks in when I face any problems and I try to solve it myself (most of the attempts remain half completed, but whatever).
 So all of these reasons led to ***making my own local cloud storage***
-Was it easy? No, Was it Worth it? YES!!!
+Was it easy? *No*, Was it Worth it? *YES*!!!
 
 ## Features
 
@@ -30,14 +30,12 @@ Was it easy? No, Was it Worth it? YES!!!
 ### 1. Installing Requirements
 - Install Node.Js on your server (simply a pc/laptop which you want to make the main storage) from [here](https://nodejs.org/en/download/)
 - Install Git on your server from [here](https://git-scm.com/downloads) only if you want to clone the repository, otherwise you can download the zip file from  repository.
+- Inititialise the node project by running the following command in your terminal
+```npm init```
 - Install express module for Node.Js by running the following command in your terminal
 ```npm install express```
-- Install body-parser module for Node.Js by running the following command in your terminal
-```npm install body-parser```
 - Install multer module for Node.Js by running the following command in your terminal
 ```npm install multer```
-- Install fs module for Node.Js by running the following command in your terminal
-```npm install fs```
 - Intall nodemon module for Node.Js by running the following command in your terminal
 ```npm install nodemon```
 now let's move on to the next step
@@ -48,7 +46,7 @@ now let's move on to the next step
 - Now, open your browser and type ```[your ip address]:3000``` in the address bar and hit enter.
     - You can find your ip address by running the following command in your terminal
     ```ipconfig``` or ```ifconfig``` (for linux users)
-
+**Note:** You'll have to edit the server.js file and select the ip address in case you have more that one network interface.
 - Now you're good to go, you can now access your cloud storage from any device on the same network.
 ### 3. How to access it from other devices?
 - Open your browser and type ```[your ip address]:3000``` in the address bar and hit enter.
