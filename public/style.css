@@ -99,3 +99,58 @@ h2{
           box-shadow: 5px 5px 10px #201f23, -5px -5px 10px #3a373f;
           transform: translate(2px, 2px);
         }
+        a {
+          color: #bebebe;
+        }
+        
+        .neumorphic-table {
+          border-radius: 21px;
+          background: linear-gradient(145deg, #29272c, #302e34);
+          box-shadow:  9px 9px 17px #1b1a1d,
+                      -9px -9px 17px #3f3c45;
+          overflow: hidden;
+        }
+        
+        .neumorphic-table th,
+        .neumorphic-table td {
+          padding: 12px;
+          text-align: center;
+          border: 1px solid #3a373f;
+          box-shadow:  19px 19px 62px #201f23,
+                      -19px -19px 62px #3a373f;
+        }
+        
+        .neumorphic-table th {
+          background-color: #2d2b31;
+          font-weight: bold;
+          border-radius: 20px 20px 0 0;
+          box-shadow:  19px 19px 62px #201f23,
+                      -19px -19px 62px #3a373f;
+        }
+        
+        .neumorphic-table td {
+          background-color: #2d2b31;
+          box-shadow:  19px 19px 62px #201f23,
+                      -19px -19px 62px #3a373f;
+        }
+        .neumorphic-button {
+          text-align: center;
+          background-color: #2d2b31;
+          border-radius: 50px;
+          border: none;
+          margin: auto;
+          box-shadow: 10px 10px 30px #201f23, -10px -10px 30px #3a373f;
+          color: #bebebe;
+          font-size: 24px;
+          padding: 16px 32px;
+          transition: all 0.3s ease-in-out;
+        }
+        
+        .neumorphic-button:hover {
+          box-shadow: 5px 5px 10px #201f23, -5px -5px 10px #3a373f;
+          transform: translate(2px, 2px);
+        }
+        table tr:hover {
+          box-shadow: 5px 5px 10px #201f23, -5px -5px 10px #3a373f;
+          transform: translate(2px, 2px);
+        }
