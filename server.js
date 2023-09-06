@@ -68,7 +68,7 @@ app.get('/', function(req, res) {
 
     const fileDetails = await Promise.all(
       files.map(async (file) => {
-        const filePath = path.join(uploadDir, file);
+        const filePath = path.join("./uploads", file);
         const stats = await fs.promises.stat(filePath);
         return {
           name: file,
